@@ -77,9 +77,10 @@
       }
       // Retrieve existing accounts
       const accounts = JSON.parse(localStorage.getItem("ramadanAccounts")) || [];
-      // Check if this email already exists; if not, create a new account (12 tasks for 30 days)
+      // Check if this email already exists
       let currentUser = accounts.find((acc) => acc.email === email);
       if (!currentUser) {
+        // Create new account if needed (tasks count is 12 * 30 days)
         currentUser = {
           id: Date.now(),
           name,
@@ -89,15 +90,16 @@
         accounts.push(currentUser);
         localStorage.setItem("ramadanAccounts", JSON.stringify(accounts));
       }
-      // Save the current user email to localStorage for dashboard retrieval
+      // Mark the current user (for retrieval in dashboard)
       localStorage.setItem("currentUserEmail", email);
       // Redirect to the dashboard page
       window.location.href = "dashboard.html";
     }
     
-    // Optional: Auto-redirect if a user is already logged in
+    // Auto-redirect if a current user already exists
     window.addEventListener("load", () => {
-      if (localStorage.getItem("currentUserEmail")) {
+      const accounts = JSON.parse(localStorage.getItem("ramadanAccounts")) || [];
+      if (accounts.length > 0 && localStorage.getItem("currentUserEmail")) {
         window.location.href = "dashboard.html";
       }
     });
