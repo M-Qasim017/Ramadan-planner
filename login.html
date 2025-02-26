@@ -84,6 +84,10 @@
         },
         body: JSON.stringify({ name, email, phone })
       })
+      if (!response.ok) {
+        alert("Failed to create user. Please try again.");
+        return;
+      }
       // Retrieve existing accounts
       const accounts = JSON.parse(localStorage.getItem("ramadanAccounts")) || [];
       // Check if this email already exists
