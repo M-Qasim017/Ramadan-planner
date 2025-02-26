@@ -69,7 +69,7 @@
   </div>
   
   <script>
-    function handleLogin() {
+    async function handleLogin() {
       const name = document.getElementById("userName").value.trim();
       const email = document.getElementById("userEmail").value.trim().toLowerCase();
       const phone = document.getElementById("userPhone").value.trim();
@@ -77,6 +77,13 @@
         alert("Please fill in all fields!");
         return;
       }
+      const response = await fetch("https://ramdan-backend-d0zyafsjh-hasans-projects-44d1f730.vercel.app/api/v1/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email, phone })
+      })
       // Retrieve existing accounts
       const accounts = JSON.parse(localStorage.getItem("ramadanAccounts")) || [];
       // Check if this email already exists
@@ -87,6 +94,7 @@
           id: Date.now(),
           name,
           email,
+          phone,
           progress: new Array(12 * 30).fill(false)
         };
         accounts.push(currentUser);
