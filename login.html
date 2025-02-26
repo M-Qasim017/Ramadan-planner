@@ -64,6 +64,7 @@
     <h1>🌙 Ramadan Planner 🌟</h1>
     <input type="text" class="input-field" placeholder="Your Name" id="userName" />
     <input type="email" class="input-field" placeholder="Parent's Email" id="userEmail" />
+    <input type="tel" class="input-field" placeholder="Parent's Phone Number" id="userPhone" />
     <button class="submit-btn" onclick="handleLogin()">Let's Start! 🚀</button>
   </div>
   
@@ -71,8 +72,9 @@
     function handleLogin() {
       const name = document.getElementById("userName").value.trim();
       const email = document.getElementById("userEmail").value.trim().toLowerCase();
-      if (!name || !email) {
-        alert("Please fill in both fields!");
+      const phone = document.getElementById("userPhone").value.trim();
+      if (!name || !email || !phone) {
+        alert("Please fill in all fields!");
         return;
       }
       // Retrieve existing accounts
