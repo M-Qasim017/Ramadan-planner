@@ -1,116 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - Kids Ramadan Planner</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    }
-    body {
-      background-color: #f0f8ff;
-      width: 100%;
-      overflow-x: hidden;
-    }
-    /* Login Container Styles */
-    .login-container {
-      background: white;
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      width: 90%;
-      max-width: 400px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-    .login-container h1 {
-      margin-bottom: 20px;
-      font-size: clamp(1.5rem, 5vw, 2rem);
-    }
-    .input-field {
-      width: 100%;
-      padding: 15px;
-      margin: 15px 0;
-      border: 3px solid #97d897;
-      border-radius: 10px;
-      font-size: 18px;
-      text-align: center;
-    }
-    .submit-btn {
-      background: #2c5f2d;
-      color: white;
-      padding: 15px 40px;
-      border: none;
-      border-radius: 30px;
-      font-size: 18px;
-      cursor: pointer;
-      margin-top: 15px;
-      transition: transform 0.2s;
-    }
-    .submit-btn:hover {
-      transform: scale(1.05);
-    }
-  </style>
-</head>
-<body>
-  <div class="login-container" id="loginContainer">
-    <h1>🌙 Ramadan Planner 🌟</h1>
-    <input type="text" class="input-field" placeholder="Your Name" id="userName" />
-    <input type="email" class="input-field" placeholder="Parent's Email" id="userEmail" />
-    <input type="tel" class="input-field" placeholder="Parent's Phone Number" id="userPhone" />
-    <button class="submit-btn" onclick="handleLogin()">Let's Start! 🚀</button>
-  </div>
-  
-  <script>
-    async function handleLogin() {
-      const name = document.getElementById("userName").value.trim();
-      const email = document.getElementById("userEmail").value.trim().toLowerCase();
-      const phone = document.getElementById("userPhone").value.trim();
-      if (!name || !email || !phone) {
-        alert("Please fill in all fields!");
-        return;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Kids Ramadan Planner</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Arial Rounded MT Bold", Arial, sans-serif;
       }
-      const response = await fetch("https://ramdan-backend-d0zyafsjh-hasans-projects-44d1f730.vercel.app/api/v1/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name, email, phone })
-      })
-      // Retrieve existing accounts
-      const accounts = JSON.parse(localStorage.getItem("ramadanAccounts")) || [];
-      // Check if this email already exists; if not, create a new account (12 tasks for 30 days)
-      let currentUser = accounts.find((acc) => acc.email === email);
-      if (!currentUser) {
-        currentUser = {
-          id: Date.now(),
-          name,
-          email,
-          phone,
-          progress: new Array(12 * 30).fill(false)
-        };
-        accounts.push(currentUser);
-        localStorage.setItem("ramadanAccounts", JSON.stringify(accounts));
+      body {
+        background-color: #f0f8ff;
+        width: 100%;
+        overflow-x: hidden;
       }
-      // Save the current user email to localStorage for dashboard retrieval
-      localStorage.setItem("currentUserEmail", email);
-      // Redirect to the dashboard page
-      window.location.href = "dashboard.html";
-    }
-    
-    // Optional: Auto-redirect if a user is already logged in
-    window.addEventListener("load", () => {
-      if (localStorage.getItem("currentUserEmail")) {
+      /* Login Container Styles */
+      .login-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .login-container h1 {
+        margin-bottom: 20px;
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
+      .input-field {
+        width: 100%;
+        padding: 15px;
+        margin: 15px 0;
+        border: 3px solid #97d897;
+        border-radius: 10px;
+        font-size: 18px;
+        text-align: center;
+      }
+      .submit-btn {
+        background: #2c5f2d;
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 30px;
+        font-size: 18px;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: transform 0.2s;
+      }
+      .submit-btn:hover {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container" id="loginContainer">
+      <h1>🌙 Ramadan Planner 🌟</h1>
+      <input
+        type="text"
+        class="input-field"
+        placeholder="Your Name"
+        id="userName"
+      />
+      <input
+        type="email"
+        class="input-field"
+        placeholder="Parent's Email"
+        id="userEmail"
+      />
+      <input
+        type="tel"
+        class="input-field"
+        placeholder="Parent's Phone Number"
+        id="userPhone"
+      />
+      <button class="submit-btn" onclick="handleLogin()">
+        Let's Start! 🚀
+      </button>
+    </div>
+
+    <script>
+      async function handleLogin() {
+        const name = document.getElementById("userName").value.trim();
+        const email = document
+          .getElementById("userEmail")
+          .value.trim()
+          .toLowerCase();
+        const phone = document.getElementById("userPhone").value.trim();
+        if (!name || !email || !phone) {
+          alert("Please fill in all fields!");
+          return;
+        }
+        const response = await fetch(
+          "https://ramdan-backend-1sl971jhc-hasans-projects-44d1f730.vercel.app/api/v1/users",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, email, phone }),
+          }
+        );
+        // Retrieve existing accounts
+        const accounts =
+          JSON.parse(localStorage.getItem("ramadanAccounts")) || [];
+        // Check if this email already exists; if not, create a new account (12 tasks for 30 days)
+        let currentUser = accounts.find((acc) => acc.email === email);
+        if (!currentUser) {
+          currentUser = {
+            id: Date.now(),
+            name,
+            email,
+            phone,
+            progress: new Array(12 * 30).fill(false),
+          };
+          accounts.push(currentUser);
+          localStorage.setItem("ramadanAccounts", JSON.stringify(accounts));
+        }
+        // Save the current user email to localStorage for dashboard retrieval
+        localStorage.setItem("currentUserEmail", email);
+        // Redirect to the dashboard page
         window.location.href = "dashboard.html";
       }
-    });
-  </script>
-</body>
+
+      // Optional: Auto-redirect if a user is already logged in
+      window.addEventListener("load", () => {
+        if (localStorage.getItem("currentUserEmail")) {
+          window.location.href = "dashboard.html";
+        }
+      });
+    </script>
+  </body>
 </html>
