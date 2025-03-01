@@ -1,116 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - Kids Ramadan Planner</title>
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-      }
-      body {
-        background-color: #f0f8ff;
-        width: 100%;
-        overflow-x: hidden;
-      }
-      /* Login Container Styles */
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Login - Kids Ramadan Planner | EmanTime</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background-color: #f5f5f5; /* Light gray background */
+      width: 100%;
+      overflow-x: hidden;
+      color: #333333; /* Dark text */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Header & Logo */
+    .header {
+      background-color: #07954A; /* Primary green */
+      padding: 15px 0;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header img {
+      max-height: 60px;
+    }
+    
+    /* Login Container Styles */
+    .login-container {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      margin: 50px auto;
+      border-top: 5px solid #07954A; /* Primary green */
+    }
+    
+    .login-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      color: #07954A; /* Primary green */
+    }
+    
+    .login-title h1 {
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      margin: 0 10px;
+    }
+    
+    .input-field {
+      width: 100%;
+      padding: 15px;
+      margin: 15px 0;
+      border: 2px solid #e8f5ee;
+      border-radius: 10px;
+      font-size: 16px;
+      text-align: left;
+      transition: all 0.3s ease;
+      background-color: #f0f5ff;
+    }
+    
+    .input-field:focus {
+      outline: none;
+      border-color: #07954A;
+      box-shadow: 0 0 0 2px rgba(7, 149, 74, 0.2);
+    }
+    
+    .submit-btn {
+      background: #07954A; /* Primary green */
+      color: white;
+      padding: 15px 40px;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(7, 149, 74, 0.2);
+    }
+    
+    .submit-btn:hover {
+      background: #046C3B;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(7, 149, 74, 0.3);
+    }
+    
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+    
+    /* Form label */
+    .form-label {
+      display: block;
+      text-align: left;
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: #666;
+      font-weight: 500;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 15px 0;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: #fff;
+      background-color: #000000;
+      margin-top: auto;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
       .login-container {
-        background: white;
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        width: 90%;
-        max-width: 400px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        padding: 1.5rem;
       }
-      .login-container h1 {
-        margin-bottom: 20px;
-        font-size: clamp(1.5rem, 5vw, 2rem);
-      }
+      
       .input-field {
-        width: 100%;
-        padding: 15px;
-        margin: 15px 0;
-        border: 3px solid #97d897;
-        border-radius: 10px;
-        font-size: 18px;
-        text-align: center;
+        padding: 12px;
+        font-size: 14px;
       }
+      
       .submit-btn {
-        background: #2c5f2d;
-        color: white;
-        padding: 15px 40px;
-        border: none;
-        border-radius: 30px;
-        font-size: 18px;
-        cursor: pointer;
-        margin-top: 15px;
-        transition: transform 0.2s;
+        padding: 12px 30px;
+        font-size: 14px;
       }
-      .submit-btn:hover {
-        transform: scale(1.05);
-      }
-    </style>
-  </head>
-  <body>
-    <div class="login-container" id="loginContainer">
-      <h1>🌙 Ramadan Planner 🌟</h1>
-      <input
-        type="text"
-        class="input-field"
-        placeholder="Your Name"
-        id="userName"
-      />
-      <input
-        type="email"
-        class="input-field"
-        placeholder="Parent's Email"
-        id="userEmail"
-      />
-      <input
-        type="tel"
-        class="input-field"
-        placeholder="Parent's Phone Number"
-        id="userPhone"
-      />
-      <button class="submit-btn" onclick="handleLogin()">
-        Let's Start! 🚀
-      </button>
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <!-- You can add a logo image here if needed -->
+  </header>
+  
+  <div class="login-container">
+    <div class="login-title">
+      <span>🌙</span>
+      <h1>Ramadan Planner</h1>
+      <span>☀️</span>
     </div>
-
-    <script>
-      async function handleLogin() {
-        const name = document.getElementById("userName").value.trim();
-        const email = document
-          .getElementById("userEmail")
-          .value.trim()
-          .toLowerCase();
-        const phone = document.getElementById("userPhone").value.trim();
-        if (!name || !email || !phone) {
-          alert("Please fill in all fields!");
-          return;
+    
+    <label for="userName" class="form-label">Child's Name</label>
+    <input
+      type="text"
+      class="input-field"
+      placeholder="Enter your child's name"
+      id="userName"
+    />
+    
+    <label for="userEmail" class="form-label">Parent's Email</label>
+    <input
+      type="email"
+      class="input-field"
+      placeholder="Enter your email"
+      id="userEmail"
+    />
+    
+    <label for="userPhone" class="form-label">Parent's Phone Number</label>
+    <input
+      type="tel"
+      class="input-field"
+      placeholder="Enter your phone number"
+      id="userPhone"
+    />
+    
+    <button class="submit-btn" onclick="handleLogin()">
+      Let's Start! 🚀
+    </button>
+  </div>
+  
+  <footer>© 2025 EMANTIME | Strengthen Your Faith Daily</footer>
+  
+  <script>
+    // Clear localStorage if it's corrupted
+    function resetLocalStorageIfCorrupted() {
+      try {
+        // Try to parse the accounts data
+        const accountsStr = localStorage.getItem("ramadanAccounts");
+        if (accountsStr) {
+          JSON.parse(accountsStr);
         }
-        const response = await fetch(
-          "https://ramdan-backend-1sl971jhc-hasans-projects-44d1f730.vercel.app/api/v1/users",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ name, email, phone }),
+      } catch (error) {
+        console.error("Corrupted localStorage detected, resetting:", error);
+        localStorage.removeItem("ramadanAccounts");
+        localStorage.removeItem("currentUserEmail");
+      }
+    }
+    
+    // Login handler
+    async function handleLogin() {
+      const name = document.getElementById("userName").value.trim();
+      const email = document.getElementById("userEmail").value.trim().toLowerCase();
+      const phone = document.getElementById("userPhone").value.trim();
+      
+      if (!name || !email || !phone) {
+        alert("Please fill in all fields!");
+        return;
+      }
+      
+      try {
+        // Send data to backend (wrapped in try/catch to handle network errors)
+        try {
+          const response = await fetch(
+            "https://ramdan-backend-1sl971jhc-hasans-projects-44d1f730.vercel.app/api/v1/users",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ name, email, phone }),
+            }
+          );
+          
+          // Check if the request was successful
+          if (!response.ok) {
+            console.warn("Backend API returned an error, but continuing with local storage");
           }
-        );
+        } catch (apiError) {
+          console.warn("Could not reach backend API, continuing with local storage only:", apiError);
+        }
+        
         // Retrieve existing accounts
-        const accounts =
-          JSON.parse(localStorage.getItem("ramadanAccounts")) || [];
-        // Check if this email already exists; if not, create a new account (12 tasks for 30 days)
+        let accounts = [];
+        try {
+          const storedAccounts = localStorage.getItem("ramadanAccounts");
+          accounts = storedAccounts ? JSON.parse(storedAccounts) : [];
+          
+          // Validate that accounts is an array
+          if (!Array.isArray(accounts)) {
+            console.warn("Invalid accounts data in localStorage, resetting");
+            accounts = [];
+          }
+        } catch (storageError) {
+          console.warn("Error reading from localStorage, resetting accounts:", storageError);
+          accounts = [];
+        }
+        
+        // Define tasks for progress array sizing
+        const taskCount = 13; // Number of tasks in the dashboard
+        
+        // Check if this email already exists; if not, create a new account
         let currentUser = accounts.find((acc) => acc.email === email);
         if (!currentUser) {
           currentUser = {
@@ -118,23 +263,41 @@
             name,
             email,
             phone,
-            progress: new Array(12 * 30).fill(false),
+            progress: new Array(taskCount * 30).fill(false), // Create progress array for all tasks
           };
           accounts.push(currentUser);
+          
+          // Save updated accounts list
           localStorage.setItem("ramadanAccounts", JSON.stringify(accounts));
         }
+        
         // Save the current user email to localStorage for dashboard retrieval
         localStorage.setItem("currentUserEmail", email);
-        // Redirect to the dashboard page
+        
+        // Redirect to dashboard
         window.location.href = "dashboard.html";
+      } catch (error) {
+        console.error("Error during login:", error);
+        alert("There was an error logging in. Please try again.");
       }
-
-      // Optional: Auto-redirect if a user is already logged in
-      window.addEventListener("load", () => {
-        if (localStorage.getItem("currentUserEmail")) {
+    }
+    
+    // Check if user is already logged in
+    window.addEventListener("load", () => {
+      try {
+        resetLocalStorageIfCorrupted();
+        
+        const currentUserEmail = localStorage.getItem("currentUserEmail");
+        if (currentUserEmail) {
+          // User is already logged in, redirect to dashboard
           window.location.href = "dashboard.html";
         }
-      });
-    </script>
-  </body>
+      } catch (error) {
+        console.error("Error checking login status:", error);
+        // Reset localStorage if there's an error
+        localStorage.removeItem("currentUserEmail");
+      }
+    });
+  </script>
+</body>
 </html>
